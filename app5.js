@@ -65,5 +65,56 @@ app.get("/janken", (req, res) => {
   
   res.render('janken', display);
 });
+app.get("/fortune", (req, res) => {
+  let birthday = req.query.birthday;
+  let win = Number(req.query.win) || 0;
+  let total = Number(req.query.total) || 0;
+  console.log({ birthday, win, total });
+
+  if (!birthday) {
+    res.render('fortune', {
+      message: "誕生日を入力してください",
+      result: '',
+      win: win,
+      total: total
+    });
+    return;
+  }
+
+  // 誕生日からランダムな数値を生成して占い結果を決定
+  const seed = new Date(birthday).getTime();
+  const random = Math.abs(Math.sin(seed)) * 10000;
+  const fortuneNum = Math.floor(random) % 5;
+  
+  let fortuneResult = '';
+  switch (fortuneNum) {
+    case 0:
+      fortuneResult = '大吉: 素晴らしい一日が待っている!';
+      win += 1; // 大吉ならラッキーとしてカウント
+      break;
+    case 1:
+      fortuneResult = '中吉: 良いことがあるかも!';
+      break;
+    case 2:
+      fortuneResult = '小吉: 今日は平穏な日です。';
+      break;
+    case 3:
+      fortuneResult = '凶: 気をつけて行動しましょう。';
+      break;
+    case 4:
+      fortuneResult = '大凶: 注意深く過ごしましょう。';
+      break;
+  }
+  total += 1;
+
+  const display = {
+    birthday: birthday,
+    result: fortuneResult,
+    win: win,
+    total: total
+  };
+
+  res.render('fortune', display);
+});
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

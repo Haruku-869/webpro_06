@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>誕生日占い</title>
+</head>
+<body>
+  <h1>誕生日占い</h1>
+  <form action="/fortune" method="get">
+    <label for="birthday">誕生日を入力してください (YYYY-MM-DD):</label>
+    <input type="date" name="birthday" required>
+    <input type="hidden" name="win" value="<%= win %>">
+    <input type="hidden" name="total" value="<%= total %>">
+    <button type="submit">占う</button>
+  </form>
+
+  <% if (result) { %>
+    <h2>占い結果: <%= result %></h2>
+    <p>これまでのラッキー数 (大吉): <%= win %></p>
+    <p>合計占い回数: <%= total %></p>
+  <% } else { %>
+    <p><%= message %></p>
+  <% } %>
+</body>
+</html>
