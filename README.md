@@ -36,6 +36,7 @@ views/persnality.ejs | 性格診断のテンプレート
 1. 自分に合う選択肢を選ぶ
 
 ### じゃんけんのフローチャート
+
 ```mermaid
 flowchart TD;
 start["開始"];
@@ -52,6 +53,7 @@ loose --> end1
 ```
 
 ### 誕生日占いのフローチャート
+
 ```mermaid
 flowchart TD;
   start["開始"];
