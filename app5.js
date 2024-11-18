@@ -114,6 +114,7 @@ app.get("/fortune", (req, res) => {
     total: total
   };
 
+  
   const express = require("express");
   const app = express();
   
