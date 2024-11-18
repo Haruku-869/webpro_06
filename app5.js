@@ -123,6 +123,8 @@ app.get("/fortune", (req, res) => {
     if (answer === 'A') result = "あなたはリーダータイプです!";
     else if (answer === 'B') result = "あなたは思慮深いタイプです!";
     else if (answer === 'C') result = "あなたは冒険心が強いタイプです!";
+    else if (answer === 'D') result = "あなたは芸術家肌のクリエイティブタイプです!";
+    else if (answer === 'E') result = "あなたは感情豊かなエンパシータイプです!";
     else result = "選択肢を選んでください。";
   
     // レンダリングするためのデータを渡す
