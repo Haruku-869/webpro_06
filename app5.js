@@ -1,42 +1,50 @@
 const express = require("express");
 const app = express();
 
+// EJS をテンプレートエンジンとして設定
 app.set('view engine', 'ejs');
+
+// 静的ファイルを提供 (例: /public 以下のファイルにアクセス可能)
 app.use("/public", express.static(__dirname + "/public"));
 
+// /hello1 ルート
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";
   const message2 = "Bon jour";
   res.render('show', { greet1: message1, greet2: message2 });
 });
 
+// /hello2 ルート
 app.get("/hello2", (req, res) => {
   res.render('show', { greet1: "Hello world", greet2: "Bon jour" });
 });
 
+// /icon ルート
 app.get("/icon", (req, res) => {
   res.render('icon', { filename: "./public/Apple_logo_black.svg", alt: "Apple Logo" });
 });
 
+// /luck ルート
 app.get("/luck", (req, res) => {
   const num = Math.floor(Math.random() * 6 + 1);
   let luck = '';
-  if (num == 1) luck = '大吉';
-  else if (num == 2) luck = '中吉';
+  if (num === 1) luck = '大吉';
+  else if (num === 2) luck = '中吉';
   console.log('あなたの運勢は' + luck + 'です');
   res.render('luck', { number: num, luck: luck });
 });
 
+// /janken ルート
 app.get("/janken", (req, res) => {
   let hand = req.query.hand;
-  let win = Number(req.query.win)||0;
-  let total = Number(req.query.total)||0;
+  let win = Number(req.query.win) || 0;
+  let total = Number(req.query.total) || 0;
   console.log({ hand, win, total });
 
   const num = Math.floor(Math.random() * 3 + 1);
   let cpu = '';
-  if (num == 1) cpu = 'グー';
-  else if (num == 2) cpu = 'チョキ';
+  if (num === 1) cpu = 'グー';
+  else if (num === 2) cpu = 'チョキ';
   else cpu = 'パー';
 
   // 勝敗の判定
@@ -62,9 +70,11 @@ app.get("/janken", (req, res) => {
     win: win,
     total: total
   };
-  
+
   res.render('janken', display);
 });
+
+// /fortune ルート
 app.get("/fortune", (req, res) => {
   let birthday = req.query.birthday;
   let win = Number(req.query.win) || 0;
@@ -85,12 +95,12 @@ app.get("/fortune", (req, res) => {
   const seed = new Date(birthday).getTime();
   const random = Math.abs(Math.sin(seed)) * 10000;
   const fortuneNum = Math.floor(random) % 5;
-  
+
   let fortuneResult = '';
   switch (fortuneNum) {
     case 0:
       fortuneResult = '大吉: 素晴らしい一日が待っている!';
-      win += 1; // 大吉ならラッキーとしてカウント
+      win += 1;
       break;
     case 1:
       fortuneResult = '中吉: 良いことがあるかも!';
@@ -114,33 +124,24 @@ app.get("/fortune", (req, res) => {
     total: total
   };
 
-  
-  const express = require("express");
-  const app = express();
-  
-  // EJS をテンプレートエンジンとして設定
-  app.set('view engine', 'ejs');
-  
-  // 静的ファイルを提供 (例: /public 以下のファイルにアクセス可能)
-  app.use("/public", express.static(__dirname + "/public"));
-  
-  app.get("/personality", (req, res) => {
-    const answer = req.query.answer || '';
-    let result = "";
-    
-    // 回答に基づいて診断結果を決定
-    if (answer === 'A') result = "あなたはリーダータイプです!";
-    else if (answer === 'B') result = "あなたは思慮深いタイプです!";
-    else if (answer === 'C') result = "あなたは冒険心が強いタイプです!";
-    else if (answer === 'D') result = "あなたは芸術家肌のクリエイティブタイプです!";
-    else if (answer === 'E') result = "あなたは感情豊かなエンパシータイプです!";
-    else result = "選択肢を選んでください。";
-  
-    // レンダリングするためのデータを渡す
-    res.render('personality', { result });
-  });
-  
   res.render('fortune', display);
 });
 
+// /personality ルート
+app.get("/personality", (req, res) => {
+  const answer = req.query.answer || '';
+  let result = "";
+
+  // 回答に基づいて診断結果を決定
+  if (answer === 'A') result = "あなたはリーダータイプです!";
+  else if (answer === 'B') result = "あなたは思慮深いタイプです!";
+  else if (answer === 'C') result = "あなたは冒険心が強いタイプです!";
+  else if (answer === 'D') result = "あなたは芸術家肌のクリエイティブタイプです!";
+  else if (answer === 'E') result = "あなたは感情豊かなエンパシータイプです!";
+  else result = "選択肢を選んでください。";
+
+  res.render('personality', { result });
+});
+
+// サーバー起動
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
