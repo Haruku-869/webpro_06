@@ -35,7 +35,7 @@ views/persnality.ejs | 性格診断のテンプレート
 1. Webブラウザでhttp://localhost:8080/personality にアクセスする
 1. 自分に合う選択肢を選ぶ
 
-###　 じゃんけんのフローチャート
+### じゃんけんのフローチャート
 ```mermaid
 flowchart TD;
 start["開始"];
@@ -51,7 +51,7 @@ if -->|no| loose
 loose --> end1
 ```
 
-###　 誕生日占いのフローチャート
+### 誕生日占いのフローチャート
 ```mermaid
 flowchart TD;
   start["開始"];
