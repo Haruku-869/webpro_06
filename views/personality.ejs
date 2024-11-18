@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>性格診断</title>
+    <meta charset="UTF-8">
+    <title>性格診断テスト</title>
 </head>
 <body>
-  <h1>性格診断テスト</h1>
-  <form action="/personality" method="get">
-    <p>質問: あなたが一番大切にしているものは何ですか？</p>
-    <label><input type="radio" name="answer" value="A"> 仲間</label><br>
-    <label><input type="radio" name="answer" value="B"> 知識</label><br>
-    <label><input type="radio" name="answer" value="C"> 冒険</label><br>
-    <label><input type="radio" name="answer" value="D"> 芸術や表現</label><br>
-    <label><input type="radio" name="answer" value="E"> 他人の気持ち</label><br>
-    <button type="submit">診断する</button>
-  </form>
-  
-  <% if (result) { %>
+    <h1>性格診断テスト</h1>
+    <form action="/personality" method="get">
+        <label><input type="radio" name="answer" value="A"> A: 率先して行動するのが好き</label><br>
+        <label><input type="radio" name="answer" value="B"> B: 深く考えるのが得意</label><br>
+        <label><input type="radio" name="answer" value="C"> C: 冒険やチャレンジが好き</label><br>
+        <label><input type="radio" name="answer" value="D"> D: 芸術や表現が得意</label><br>
+        <label><input type="radio" name="answer" value="E"> E: 他人の気持ちに敏感</label><br><br>
+        <button type="submit">診断する</button>
+    </form>
+
     <h2>診断結果:</h2>
     <p><%= result %></p>
-  <% } %>
-
-  <a href="/personality">もう一度診断する</a>
 </body>
 </html>
