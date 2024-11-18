@@ -114,6 +114,21 @@ app.get("/fortune", (req, res) => {
     total: total
   };
 
+
+  app.get("/personality", (req, res) => {
+    const answer = req.query.answer || '';
+    let result = "";
+    
+    // 回答に基づいて診断結果を決定
+    if (answer === 'A') result = "あなたはリーダータイプです!";
+    else if (answer === 'B') result = "あなたは思慮深いタイプです!";
+    else if (answer === 'C') result = "あなたは冒険心が強いタイプです!";
+    else result = "選択肢を選んでください。";
+  
+    // レンダリングするためのデータを渡す
+    res.render('personality', { result });
+  });
+  
   res.render('fortune', display);
 });
 
