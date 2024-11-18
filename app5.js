@@ -114,7 +114,15 @@ app.get("/fortune", (req, res) => {
     total: total
   };
 
-
+  const express = require("express");
+  const app = express();
+  
+  // EJS をテンプレートエンジンとして設定
+  app.set('view engine', 'ejs');
+  
+  // 静的ファイルを提供 (例: /public 以下のファイルにアクセス可能)
+  app.use("/public", express.static(__dirname + "/public"));
+  
   app.get("/personality", (req, res) => {
     const answer = req.query.answer || '';
     let result = "";
